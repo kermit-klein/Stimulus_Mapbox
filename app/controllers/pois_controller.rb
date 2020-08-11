@@ -1,18 +1,18 @@
 class PoisController < ApplicationController
-  before_action :set_poi, only: [:show, :edit, :update, :destroy]
+  before_action :set_poi, only: %i[show edit update destroy]
 
   # GET /pois
   # GET /pois.json
   def index
     @pois = Poi.geocoded
     @markers = @pois.map do |poi|
-      { lat: poi.latitude, lng: poi.longitude}
+      { lat: poi.latitude, lng: poi.longitude }
+    end
   end
 
   # GET /pois/1
   # GET /pois/1.json
-  def show
-  end
+  def show; end
 
   # GET /pois/new
   def new
@@ -20,8 +20,7 @@ class PoisController < ApplicationController
   end
 
   # GET /pois/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /pois
   # POST /pois.json
@@ -64,13 +63,14 @@ class PoisController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_poi
-      @poi = Poi.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def poi_params
-      params.require(:poi).permit(:name, :latitude, :longitude)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_poi
+    @poi = Poi.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def poi_params
+    params.require(:poi).permit(:name, :latitude, :longitude)
+  end
 end
