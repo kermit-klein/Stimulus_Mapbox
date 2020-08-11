@@ -4,7 +4,9 @@ class PoisController < ApplicationController
   # GET /pois
   # GET /pois.json
   def index
-    @pois = Poi.all
+    @pois = Poi.geocoded
+    @markers = @pois.map do |poi|
+      { lat: poi.latitude, lng: poi.longitude}
   end
 
   # GET /pois/1
