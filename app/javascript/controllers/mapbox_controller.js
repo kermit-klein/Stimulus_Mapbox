@@ -38,7 +38,9 @@ export default class extends Controller {
       (marker1) => !this.markers.some((marker2) => marker1.name == marker2.name)
     );
 
-    this.showNewMarkers();
+    newMarkers.forEach((m) => {
+      this.addMarker(m);
+    });
   }
 
   addMarker(marker) {
